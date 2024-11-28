@@ -1,1 +1,17 @@
-<p>new-books works!</p>
+<form (ngSubmit)="onSubmit()" #bookForm="ngForm">
+    <mat-form-field>
+      <input matInput placeholder="Titre" [(ngModel)]="book.title" name="title" required />
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput placeholder="Auteur" [(ngModel)]="book.author" name="author" required />
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput type="number" placeholder="Prix" [(ngModel)]="book.price" name="price" required />
+    </mat-form-field>
+  
+  
+    <button mat-raised-button color="primary" type="submit">Ajouter</button>
+  </form>
+  

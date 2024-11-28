@@ -1,0 +1,25 @@
+{
+  "books": [
+    {
+      "id": "1",
+      "title": "Angular Basics",
+      "author": "John Doe",
+      "price": 20,
+      "publicationDate": "2024-01-01"
+    },
+    {
+      "id": "2",
+      "title": "Mastering TypeScript",
+      "author": "Jane Smith",
+      "price": 25,
+      "publicationDate": "2023-05-15"
+    },
+    {
+      "id": "0",
+      "title": "test",
+      "author": "test",
+      "price": 25,
+      "publicationDate": "2024-11-28T17:14:20.685Z"
+    }
+  ]
+}

@@ -9,7 +9,7 @@
     <span class="spacer"></span>
   
     <!-- Menu accessible à tous -->
-    <button mat-button routerLink="/admin//home">Accueil</button>
+    <button mat-button routerLink="/admin/home">Accueil</button>
     <button mat-button routerLink="/admin/books">Livres</button>
   
     <!-- Menu pour "Admin" uniquement -->
@@ -29,7 +29,7 @@
       <mat-nav-list>
         <!-- Accessible à tous les rôles -->
         <mat-list-item>
-          <button mat-button routerLink="/books">
+          <button mat-button routerLink="/admin/books">
             <mat-icon>menu_book</mat-icon>
             Livres
           </button>
@@ -37,7 +37,7 @@
   
         <!-- Menu pour "Admin" uniquement -->
         <mat-list-item *ngIf="authService.roles.includes('ADMIN')">
-          <button mat-button routerLink="/new-book">
+          <button mat-button routerLink="/admin/new-books">
             <mat-icon>library_add</mat-icon>
             Nouveau Livre
           </button>

@@ -1,0 +1,63 @@
+    <mat-toolbar color="primary">
+    <!-- Bouton pour ouvrir le drawer -->
+    <button mat-icon-button (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  
+    <!-- Barre de navigation horizontale -->
+    <span>GestBiblio</span>
+    <span class="spacer"></span>
+  
+    <!-- Menu accessible à tous -->
+    <button mat-button routerLink="/admin//home">Accueil</button>
+    <button mat-button routerLink="/admin/books">Livres</button>
+  
+    <!-- Menu pour "Admin" uniquement -->
+    <button *ngIf="authService.roles.includes('ADMIN')" mat-button routerLink="/admin/new-books">Nouveau Livre</button>
+  
+    <!-- Affichage du nom utilisateur connecté -->
+    <span *ngIf="authService.authenticated==true" class="username">{{ authService.username }}</span>
+    
+    <!-- Bouton de déconnexion -->
+    <button mat-raised-button color="accent" (click)="logout()">Déconnexion</button>
+  </mat-toolbar>
+  
+  <!-- Conteneur du Drawer -->
+  <mat-drawer-container>
+    <!-- Menu latéral (Drawer) -->
+    <mat-drawer #drawer mode="side" opened="true">
+      <mat-nav-list>
+        <!-- Accessible à tous les rôles -->
+        <mat-list-item>
+          <button mat-button routerLink="/books">
+            <mat-icon>menu_book</mat-icon>
+            Livres
+          </button>
+        </mat-list-item>
+  
+        <!-- Menu pour "Admin" uniquement -->
+        <mat-list-item *ngIf="authService.roles.includes('ADMIN')">
+          <button mat-button routerLink="/new-book">
+            <mat-icon>library_add</mat-icon>
+            Nouveau Livre
+          </button>
+        </mat-list-item>
+  
+        <!-- Menu d'emprunt des livres (tous les utilisateurs) -->
+        <mat-list-item>
+          <button mat-button routerLink="/borrow-book">
+            <mat-icon>book</mat-icon>
+            Emprunt Livre
+          </button>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-drawer>
+  
+    <!-- Contenu principal -->
+    <mat-drawer-content>
+      <div style="min-height: 600px">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+  

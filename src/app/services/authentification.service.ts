@@ -36,4 +36,8 @@ export class AuthenticationService {
     this.roles = [];
     this.router.navigateByUrl("/login");
   }
+
+  addUser(user: { username: string; password: string; roles: string[] }): Observable<any> {
+    return this.http.post(this.apiUrl, user);
+  }
 }

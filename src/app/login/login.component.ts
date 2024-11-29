@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../services/authentification.service";
 import {Route, Router} from "@angular/router";
 
@@ -11,6 +11,9 @@ import {Route, Router} from "@angular/router";
 export class LoginComponent implements OnInit{
   errorMessage: string = '';
   public loginFormGroup! : FormGroup;
+  registerFormGroup!: FormGroup;
+  roles : string[] = ['ADMIN','USER']
+
   constructor(private fb : FormBuilder,
               private authService : AuthenticationService,
               private router : Router) {
@@ -20,13 +23,21 @@ export class LoginComponent implements OnInit{
       username : this.fb.control(''),
       password : this.fb.control('')
     });
+
+    this.registerFormGroup = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required]
+    });
+
+    this.registerFormGroup.disable();
   }
 
   login(): void {
     this.authService.login(this.loginFormGroup.value.username, this.loginFormGroup.value.password).subscribe(
       success => {
         if (success) {
-          this.router.navigate(['/admin']); // Redirige vers la page d'accueil après connexion
+          this.router.navigate(['/admin']); 
         } else {
           this.errorMessage = 'Nom d\'utilisateur ou mot de passe incorrect';
         }
@@ -36,5 +47,33 @@ export class LoginComponent implements OnInit{
         this.errorMessage = 'Erreur de connexion au serveur.';
       }
     );
+  }
+
+  register(): void {
+    if (this.registerFormGroup.valid) {
+      const { username, password, confirmPassword } = this.registerFormGroup.value;
+      if (password === confirmPassword) {
+        let roles : string[] = [];
+        roles.push(this.roles[1])
+        this.authService.addUser({ username, password,roles}).subscribe(() => {
+          alert('Utilisateur créé avec succès !');
+          this.toggleLogin(); 
+        });
+      } else {
+        alert('Les mots de passe ne correspondent pas.');
+      }
+    }
+  }
+
+  toggleRegister(): void {
+    this.registerFormGroup.reset();
+    this.registerFormGroup.enable();
+    this.loginFormGroup.disable();
+  }
+
+  toggleLogin(): void {
+    this.loginFormGroup.reset();
+    this.loginFormGroup.enable();
+    this.registerFormGroup.disable();
   }
 }

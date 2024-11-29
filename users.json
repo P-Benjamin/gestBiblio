@@ -1,6 +1,28 @@
 {
-    "users":[
-        { "id": 1, "username": "admin", "password": "1234", "roles": ["ADMIN"] },
-        { "id": 2, "username": "user1", "password": "1234", "roles": ["USER"] }
-    ]
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "1234",
+      "roles": [
+        "ADMIN"
+      ]
+    },
+    {
+      "id": "2",
+      "username": "user1",
+      "password": "1234",
+      "roles": [
+        "USER"
+      ]
+    },
+    {
+      "id": "c74b",
+      "username": "test",
+      "password": "1234",
+      "roles": [
+        "USER"
+      ]
+    }
+  ]
 }

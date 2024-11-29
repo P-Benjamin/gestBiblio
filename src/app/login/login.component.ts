@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../services/authentification.service";
 import {Route, Router} from "@angular/router";
+import { User } from '../model/users.model';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,8 @@ export class LoginComponent implements OnInit{
   errorMessage: string = '';
   public loginFormGroup! : FormGroup;
   registerFormGroup!: FormGroup;
-  roles : string[] = ['ADMIN','USER']
+  user: User = { username: '', password: '', roles: ["USER"] };
+
 
   constructor(private fb : FormBuilder,
               private authService : AuthenticationService,
@@ -53,9 +55,10 @@ export class LoginComponent implements OnInit{
     if (this.registerFormGroup.valid) {
       const { username, password, confirmPassword } = this.registerFormGroup.value;
       if (password === confirmPassword) {
-        let roles : string[] = [];
-        roles.push(this.roles[1])
-        this.authService.addUser({ username, password,roles}).subscribe(() => {
+        this.user.username = username;
+        this.user.password = password
+
+        this.authService.addUser(this.user).subscribe(() => {
           alert('Utilisateur créé avec succès !');
           this.toggleLogin(); 
         });

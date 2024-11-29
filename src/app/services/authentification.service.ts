@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Router} from "@angular/router";
 import { map, Observable } from 'rxjs';
+import { User } from '../model/users.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class AuthenticationService {
     this.router.navigateByUrl("/login");
   }
 
-  addUser(user: { username: string; password: string; roles: string[] }): Observable<any> {
+  addUser(user :User): Observable<any> {
     return this.http.post(this.apiUrl, user);
   }
 }

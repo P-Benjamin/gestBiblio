@@ -23,6 +23,14 @@
       "roles": [
         "USER"
       ]
+    },
+    {
+      "id": "cb27",
+      "username": "test123",
+      "password": "1234",
+      "roles": [
+        "USER"
+      ]
     }
   ]
 }

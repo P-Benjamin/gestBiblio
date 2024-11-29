@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Book } from '../model/books.model';
 import { BookService } from '../services/book.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-books',
@@ -10,7 +11,7 @@ import { BookService } from '../services/book.service';
 export class BooksComponent {
   books: Book[] = [];
 
-  constructor(private bookService: BookService) {}
+  constructor(private bookService: BookService, private router : Router) {}
 
   ngOnInit() {
     this.loadBooks();
@@ -21,6 +22,10 @@ export class BooksComponent {
       data => this.books = data,
       error => console.error('Erreur lors de la récupération des livres', error)
     );
+  }
+
+  editBook(book: Book) {
+      this.router.navigate(['/admin/books/edit', book.id]);
   }
 
   deleteBook(id: string) {

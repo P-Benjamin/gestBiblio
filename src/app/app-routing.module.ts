@@ -14,7 +14,8 @@ const routes: Routes = [
     children : [
       {path : "home", component : HomeComponent},
       {path : "books", component : BooksComponent},
-      {path : "new-books", component : NewBooksComponent}
+      {path : "new-books", component : NewBooksComponent},
+      { path: 'books/edit/:id', component: NewBooksComponent}
     ]},
 ];
 

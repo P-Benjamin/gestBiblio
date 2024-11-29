@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Book } from '../model/books.model';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +28,14 @@ export class BookService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
+  getBookById(id: string): Observable<Book> {
+    return this.http.get<Book>(`${this.apiUrl}/${id}`);
+  }
+
+  getLastId(): Observable<number> {
+    return this.http.get<Book[]>(this.apiUrl).pipe(
+      map(books => books.length ? Math.max(...books.map(book => Number(book.id))) : 0)
+    );
+  }
 
 }

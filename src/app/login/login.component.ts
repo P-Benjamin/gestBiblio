@@ -9,7 +9,7 @@ import {Route, Router} from "@angular/router";
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit{
-
+  errorMessage: string = '';
   public loginFormGroup! : FormGroup;
   constructor(private fb : FormBuilder,
               private authService : AuthenticationService,
@@ -22,13 +22,19 @@ export class LoginComponent implements OnInit{
     });
   }
 
-  login() {
-    let username = this.loginFormGroup.value.username;
-    let password = this.loginFormGroup.value.password;
-    let auth = this.authService.login(username, password);
-    if(auth==true){
-      console.log(auth);
-      this.router.navigateByUrl("admin");
-    }
+  login(): void {
+    this.authService.login(this.loginFormGroup.value.username, this.loginFormGroup.value.password).subscribe(
+      success => {
+        if (success) {
+          this.router.navigate(['/admin']); // Redirige vers la page d'accueil après connexion
+        } else {
+          this.errorMessage = 'Nom d\'utilisateur ou mot de passe incorrect';
+        }
+      },
+      error => {
+        console.error('Erreur lors de la connexion', error);
+        this.errorMessage = 'Erreur de connexion au serveur.';
+      }
+    );
   }
 }

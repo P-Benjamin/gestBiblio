@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Book } from '../model/books.model';
 import { BookService } from '../services/book.service';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../services/authentification.service';
 
 @Component({
   selector: 'app-books',
@@ -10,10 +11,12 @@ import { Router } from '@angular/router';
 })
 export class BooksComponent {
   books: Book[] = [];
+  public roles : string[] = [];
 
-  constructor(private bookService: BookService, private router : Router) {}
+  constructor(private bookService: BookService,private authService : AuthenticationService, private router : Router) {}
 
   ngOnInit() {
+    this.roles = this.authService.roles
     this.loadBooks();
   }
 

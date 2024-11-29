@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Router} from "@angular/router";
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,21 +10,24 @@ export class AuthenticationService {
   public username : any;
   public roles : string[] = [];
   public authenticated : boolean =false;
-  public users:any = {
-    admin : ['STUDENT','ADMIN'],
-    user1 : ['STUDENT']
-  }
-  constructor(private router : Router) { }
+  private apiUrl = 'http://localhost:3000/users'; // json-server --watch users.json --port 3000
 
-  public login(username : string, password : string){
-    if(this.users[username] && password=="1234"){
-      this.username = username;
-      this.roles = this.users[username];
-      this.authenticated = true;
-      return true;
-    } else {
-      return false;
-    }
+  constructor(private http: HttpClient, private router: Router) {}
+
+  public login(username: string, password: string): Observable<boolean> {
+    return this.http.get<any[]>(this.apiUrl).pipe(
+      map(users => {
+        const user = users.find(u => u.username === username && u.password === password);
+        if (user) {
+          this.username = user.username;
+          this.roles = user.roles;
+          this.authenticated = true;
+          return true;
+        } else {
+          return false;
+        }
+      })
+    );
   }
 
   logout() {

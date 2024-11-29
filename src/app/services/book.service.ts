@@ -8,7 +8,7 @@ import { map, Observable } from 'rxjs';
 })
 export class BookService {
 
-  private apiUrl = 'http://localhost:3000/books'; // URL de l'API
+  private apiUrl = 'http://localhost:3001/books'; // json-server --watch books.json --port 3001
 
   constructor(private http: HttpClient) {}
 

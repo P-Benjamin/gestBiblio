@@ -30,6 +30,8 @@ import { AuthorizationGuard } from './guards/authorization.guard';
 import { BooksComponent } from './books/books.component';
 import { NewBooksComponent } from './new-books/new-books.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MatSelectModule } from '@angular/material/select';
+import { BorrowedBooksComponent } from './borrowed-books/borrowed-books.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { HttpClientModule } from '@angular/common/http';
     AdminTemplateComponent,
     HomeComponent,
     BooksComponent,
-    NewBooksComponent
+    NewBooksComponent,
+    BorrowedBooksComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,8 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatSelectModule 
   ],
   providers: [
     provideAnimationsAsync(), AuthGuard, AuthorizationGuard

@@ -1,18 +1,28 @@
 {
   "books": [
     {
-      "id": "1",
       "title": "Angular Basics",
       "author": "John Doe",
       "price": 200,
-      "publicationDate": "2024-01-01"
+      "publicationDate": "2024-01-01",
+      "available": false,
+      "id": "1"
     },
     {
-      "id": "2",
       "title": "Mastering TypeScript",
       "author": "Jane Smith",
       "price": 25,
-      "publicationDate": "2023-05-15"
+      "publicationDate": "2023-05-15",
+      "available": false,
+      "id": "2"
+    },
+    {
+      "title": "test",
+      "author": "134",
+      "price": 1234,
+      "publicationDate": "1062-10-10",
+      "available": true,
+      "id": "f58e"
     }
   ]
 }

@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit{
   errorMessage: string = '';
   public loginFormGroup! : FormGroup;
   registerFormGroup!: FormGroup;
-  user: User = { username: '', password: '', roles: ["USER"] };
+  user: User = { username: '', password: '', roles: ["USER"], id_book:[] };
 
 
   constructor(private fb : FormBuilder,

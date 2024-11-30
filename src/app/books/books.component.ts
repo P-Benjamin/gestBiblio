@@ -37,6 +37,26 @@ export class BooksComponent {
       this.loadBooks();
     });
   }
+
+  borrowBook(book: Book) {
+    const currentUser = this.authService.getCurrentUser();
+    if (!currentUser.id_book) {
+      currentUser.id_book = [];
+    }
+    
+    currentUser.id_book.push(book.id);
+    
+    this.authService.updateUser(currentUser).subscribe({
+      next: () => {
+        book.available = false;
+        this.bookService.updateBook(book).subscribe({
+          next: () => alert(`Le livre "${book.title}" a été emprunté avec succès !`),
+          error: () => alert(`Erreur lors de la mise à jour de la disponibilité du livre "${book.title}".`)
+        });
+      },
+      error: () => alert("Erreur lors de la mise à jour de l'utilisateur.")
+    });
+  }
 }
 
 

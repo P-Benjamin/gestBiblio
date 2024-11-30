@@ -14,6 +14,9 @@
       "password": "1234",
       "roles": [
         "USER"
+      ],
+      "id_book": [
+        "1"
       ]
     },
     {
@@ -30,6 +33,17 @@
       "password": "1234",
       "roles": [
         "USER"
+      ]
+    },
+    {
+      "id": "a842",
+      "username": "user2",
+      "password": "1234",
+      "roles": [
+        "USER"
+      ],
+      "id_book": [
+        "2"
       ]
     }
   ]

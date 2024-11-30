@@ -1,18 +1,33 @@
-<form (ngSubmit)="onSubmit()" #bookForm="ngForm">
-    <mat-form-field>
-      <input matInput placeholder="Titre" [(ngModel)]="book.title" name="title" required />
-    </mat-form-field>
-  
-    <mat-form-field>
-      <input matInput placeholder="Auteur" [(ngModel)]="book.author" name="author" required />
-    </mat-form-field>
-  
-    <mat-form-field>
-      <input matInput type="number" placeholder="Prix" [(ngModel)]="book.price" name="price" required />
-    </mat-form-field>
-  
-  
-    <button mat-raised-button color="primary" type="submit">  {{ isEditMode ? 'Modifier' : 'Ajouter' }}
-    </button>
-  </form>
-  
+<form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline">
+    <mat-label>Titre</mat-label>
+    <input matInput formControlName="title" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Auteur</mat-label>
+    <input matInput formControlName="author" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Prix</mat-label>
+    <input type="number" matInput formControlName="price" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Date de publication</mat-label>
+    <input matInput type="date" formControlName="publicationDate" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Disponible</mat-label>
+    <mat-select formControlName="available">
+      <mat-option [value]="true">Oui</mat-option>
+      <mat-option [value]="false">Non</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">
+    {{ isEditMode ? 'Modifier' : 'Ajouter' }} le livre
+  </button>
+</form>

@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Book } from '../model/books.model';
 import { BookService } from '../services/book.service';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentification.service';
+import { DataTable} from "simple-datatables"
 
 @Component({
   selector: 'app-books',
   templateUrl: './books.component.html',
   styleUrl: './books.component.css'
 })
-export class BooksComponent {
+export class BooksComponent implements OnInit, AfterViewInit{
   books: Book[] = [];
   public roles : string[] = [];
 
@@ -19,6 +20,24 @@ export class BooksComponent {
     this.roles = this.authService.roles
     this.loadBooks();
   }
+
+  ngAfterViewInit() : void 
+  {
+    setTimeout(() => {
+      const table = new DataTable("#productTable", {
+        searchable : true,
+        perPage : 10,
+        perPageSelect : [5,10,20,40],
+        labels : {
+          placeholder : "Rechercher ...",
+          perPage : "produits par page",
+          noRows : "Aucun produit trouvé",
+          info : "Affichage de {start à {end} sur {rows} produits"
+        }
+      });
+    },100)
+  }
+
 
   loadBooks() {
     this.bookService.getBooks().subscribe(

@@ -1,4 +1,4 @@
-<!--<table mat-table [dataSource]="books" class="mat-elevation-z8" >
+<table mat-table [dataSource]="books" class="mat-elevation-z8" >
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef> Titre </th>
       <td mat-cell *matCellDef="let book"> {{ book.title }} </td>
@@ -42,9 +42,9 @@
   
     <tr mat-header-row *matHeaderRowDef="['title', 'author', 'price', 'publicationDate', 'available', 'actions']"></tr>
     <tr mat-row *matRowDef="let row; columns: ['title', 'author', 'price', 'publicationDate', 'available', 'actions']"></tr>
--->
+
     
-    <table id="productTable" class="table">
+    <!-- <table id="productTable" class="table">
       <thead>
         <tr>
           <th> Nom </th>
@@ -60,4 +60,4 @@
           <td> {{ book.available }}</td>
         </tr>
       </tbody>
-    </table>  
+    </table>   -->
